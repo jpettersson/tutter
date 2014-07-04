@@ -19,7 +19,7 @@ class Tutter < Sinatra::Base
   end
 
   configure :production do
-    set :config, YAML.load_file('/etc/tutter.yaml')
+    set :config, YAML.load_file('conf/tutter.yaml')
   end
 
   # Return project settings from config
