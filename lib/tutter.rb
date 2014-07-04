@@ -53,6 +53,10 @@ class Tutter < Sinatra::Base
       c.web_endpoint = conf['github_site']
     end
 
+    puts "Access token:"
+    puts conf['access_token_env_var']
+    puts ENV[conf['access_token_env_var']]
+
     client = Octokit::Client.new :access_token => ENV[conf['access_token_env_var']]
 
     # Load action
