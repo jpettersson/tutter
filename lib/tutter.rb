@@ -24,6 +24,7 @@ class Tutter < Sinatra::Base
 
   # Return project settings from config
   def get_project_settings project
+    puts settings.config['projects'].inspect
     settings.config['projects'].each do |p|
       return p if p['name'] == project
     end
@@ -47,7 +48,7 @@ class Tutter < Sinatra::Base
       c.web_endpoint = conf['github_site']
     end
 
-    client = Octokit::Client.new :access_token => conf['access_token']
+    client = Octokit::Client.new :access_token => ENV[conf['access_token_env_var']]
 
     # Load action
     action = Action.create(conf['action'],
