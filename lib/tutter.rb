@@ -38,6 +38,11 @@ class Tutter < Sinatra::Base
     rescue JSON::ParserError
       error(400, 'POST data is not JSON')
     end
+
+    unless data['repository']
+      error(500, 'Invalid request')
+    end
+
     project = data['repository']['full_name'] || error(400, 'Bad request')
 
     conf = get_project_settings(project) || error(404, 'Project does not exist in tutter.conf')
