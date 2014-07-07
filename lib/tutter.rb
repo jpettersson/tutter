@@ -60,7 +60,7 @@ class Tutter < Sinatra::Base
     event = env['HTTP_X_GITHUB_EVENT']
 
     unless event
-      error(500, 'Invalid request')
+      error(500, "Invalid request #{env.inspect}")
     end
 
     # Get a 200 OK message in the webhook history
