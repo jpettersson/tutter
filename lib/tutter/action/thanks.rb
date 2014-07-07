@@ -20,6 +20,7 @@ class Thanks
 
     begin
       @client.add_comment(@project, issue, comment)
+      return 200, "Commented!"
     rescue Octokit::Unauthorized
       return 401, "Authorization to #{@project} failed, please verify your access token"
     rescue Octokit::TooManyLoginAttempts
