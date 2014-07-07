@@ -39,6 +39,11 @@ class Tutter < Sinatra::Base
       error(400, 'POST data is not JSON')
     end
 
+    # Get a 200 OK message in the webhook history
+    if data['hook']
+      return 200, "Tutter likes this hook!"
+    end
+
     unless data['repository']
       error(500, 'Invalid request')
     end
@@ -52,10 +57,6 @@ class Tutter < Sinatra::Base
       c.api_endpoint = conf['github_api_endpoint']
       c.web_endpoint = conf['github_site']
     end
-
-    puts "Access token:"
-    puts conf['access_token_env_var']
-    puts ENV[conf['access_token_env_var']]
 
     client = Octokit::Client.new :access_token => ENV[conf['access_token_env_var']]
 
